@@ -12,24 +12,6 @@ namespace rs2 {
     namespace tools {
         namespace converter {
 
-            inline std::string pretty_time(std::chrono::nanoseconds d)
-            {
-                auto hhh = std::chrono::duration_cast<std::chrono::hours>(d);
-                d -= hhh;
-                auto mm = std::chrono::duration_cast<std::chrono::minutes>(d);
-                d -= mm;
-                auto ss = std::chrono::duration_cast<std::chrono::seconds>(d);
-                d -= ss;
-                auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(d);
-
-                std::ostringstream stream;
-                stream << std::setfill('0') << std::setw(3) << hhh.count() << ':' <<
-                       std::setfill('0') << std::setw(2) << mm.count() << ':' <<
-                       std::setfill('0') << std::setw(2) << ss.count() << '.' <<
-                       std::setfill('0') << std::setw(3) << ms.count();
-                return stream.str();
-            }
-
             class converter_ply : public converter_base {
             protected:
                 std::string _filePath;
