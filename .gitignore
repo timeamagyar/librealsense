@@ -1,3 +1,10 @@
+examples/.idea/
+examples/cmake/.idea/
+examples/playback/
+examples/record-playback/*
+
+ubuntu-bionic-master/
+
 bin/
 lib/
 
