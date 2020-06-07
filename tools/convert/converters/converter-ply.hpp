@@ -29,8 +29,6 @@ namespace rs2 {
 
                 void convert(rs2::frameset& frameset) override
                 {
-                    static int counter;
-
                     rs2::pointcloud pc;
                     start_worker(
                         [this, &frameset, pc]() mutable {
@@ -50,12 +48,14 @@ namespace rs2 {
                                 param = frameDepth.get_timestamp()/1000;
                                 fractpart = modf (param , &intpart);
                                 std::stringstream filename;
-                                filename << counter
-                                    << "_" << static_cast<uint32_t>(trunc(param)) << "." << static_cast<uint32_t>(round(fractpart * 1000000000))
+                                filename << _filePath
+                                    << "_" << static_cast<uint32_t>(trunc(param))
+                                    << "." << std::setfill('0')
+                                    << std::setw(9)
+                                    << static_cast<uint32_t>(round(fractpart * 1000000000))
                                     << ".ply";
 
                                 points.export_to_ply(filename.str(), frameColor);
-                                counter ++;
                             }
                         });
                 }
